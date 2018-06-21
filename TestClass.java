@@ -39,10 +39,20 @@ public class TestClass {
         System.out.println("The sorted elements are as follows: ") ;
         for(int iterator= 0 ; iterator< arrayToBeSorted.length ; iterator++){System.out.print(arrayToBeSorted[iterator]+" ") ;}
         System.out.println();
-        System.out.println();
+
         System.out.println("The runtime for Insertion Sort with "+numberOfElements+" elements is "+runTimeInsertionSort+ " nanoSeconds" ) ;
         System.out.println() ;
 
+
+        // runining Selection Sort
+        long startTimeSelectionSort = System.nanoTime() ;
+        SortingAlgorithms.selectionSort(arrayToBeSorted);
+        long endTimeSelectionSort = System.nanoTime() ;
+        long runTimeSelectiionSort = endTimeSelectionSort - startTimeInsertionSort ;
+
+        for(int iterator = 0 ; iterator<arrayToBeSorted.length ; iterator++){System.out.print(arrayToBeSorted[iterator]+ " ") ; }
+        System.out.println() ;
+        System.out.println("The runtime of SELECTION SORT with " + numberOfElements+" elements is "+ runTimeSelectiionSort+" nanoseconds") ;
 
 
     }

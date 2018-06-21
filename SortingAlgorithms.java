@@ -26,11 +26,42 @@ public final class SortingAlgorithms {
     }
 
 
-    public static void mergeSort(int[] array){
+    /**
+     * Big O of n^2 (The best and the worst case time)
+     * */
+        public static void selectionSort(int[] array){
 
-        
+            int length = array.length;
 
-    }
+            // initializing smallest
+            int smallest = 0;
+            int exchangeVar = 0 ;
+            for(int counter = 0 ; counter<array.length-1 ; counter++){
+                smallest = counter ;
+                for(int i = counter+1 ; i<array.length ; i++){
+                    if(array[i]<array[smallest]){
+
+                        smallest = i ;
+                    }
+
+                }
+                // exchanging the variables
+                exchangeVar = array[counter] ;
+                array[counter] = array[smallest] ;
+                array[smallest]= exchangeVar ;
+            }
+
+        }
+
+     /**
+      * runtime big O(n^2)
+      * */
+     public static void bubbleSort(int[] array){}
+
+     /**
+      * runTime big O(n ( log(n) ) )
+      * */
+    public static void mergeSort(int[] array){}
 
 
 }
