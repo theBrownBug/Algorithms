@@ -53,8 +53,9 @@ public class TestClassSearch {
 
 
 
-        // running JumpSearch
 
+
+        // running JumpSearch
         int[] arrayJumpSearch = TestClass.randomArray(100,sizeOfArray) ;
         SortingAlgorithms.insertionSort(arrayJumpSearch);// sorting the array
 
@@ -97,6 +98,50 @@ public class TestClassSearch {
             System.out.println("The time for Interpolation Search is"+ differenceInterpolationSearch+" nanoSeconds") ;
         }
 
+
+
+
+
+        // running Exponential Search
+        int[] arrayExponentialSearch = TestClass.randomArray(100,sizeOfArray) ;
+        // Sorting the array first
+        SortingAlgorithms.insertionSort(arrayExponentialSearch);
+        long startTimeExponentialSearch = System.nanoTime() ;
+        int positionExponentialSearch = SearchingAlgorithms.exponentialSearch(arrayExponentialSearch,arrayExponentialSearch.length,toBeFound) ;
+        long endTimeExponentialSearch = System.nanoTime();
+        long differenceExponentialSearch = endTimeExponentialSearch - startTimeExponentialSearch ;
+
+        if(positionExponentialSearch==-1){
+            System.out.println("The randomly generated element"+toBeFound+" is not present in the randomly generated array") ;
+            System.out.println("The time for exponential search is"+differenceExponentialSearch+" nanoSeconds") ;
+
+        }
+        else{
+            System.out.println("The randomly generated element"+ toBeFound+" is present at"+ positionExponentialSearch+" in the array") ;
+            System.out.println("The time for exponential search is "+differenceExponentialSearch+" nanoSeconds") ;
+        }
+
+
+
+
+        // running Fibonacci Search
+
+        int[] arrayFibonacciSearch = TestClass.randomArray(100, sizeOfArray) ;
+        // Sorting the array first
+        SortingAlgorithms.insertionSort(arrayFibonacciSearch) ;
+        long startFibonacciSearch = System.nanoTime();
+        int positionFibonacciSearch = SearchingAlgorithms.fibonacciSearch(arrayFibonacciSearch,toBeFound,arrayFibonacciSearch.length) ;
+        long endFibonacciSearch = System.nanoTime() ;
+        long differenceFibonacciSearch = endFibonacciSearch - startFibonacciSearch ;
+
+        if(positionFibonacciSearch==-1){
+            System.out.println("The randomly Generated element"+toBeFound+" is not present in the radnomly generated array") ;
+            System.out.println("The time for exponential search is"+ differenceFibonacciSearch+" nanoSeconds") ;
+        }
+        else{
+            System.out.println("The randomly generated element"+ toBeFound+" is present at"+ positionFibonacciSearch+" in the array") ;
+            System.out.println("The time for exponential search is "+ differenceFibonacciSearch+" nanoSeconds") ;
+        }
 
 
 

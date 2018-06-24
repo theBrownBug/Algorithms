@@ -122,7 +122,7 @@ public class TestClass {
 
 
 
-
+        /*
 
 
         // calling MergeSort
@@ -138,6 +138,7 @@ public class TestClass {
         System.out.println() ;
         System.out.println("The runtime of MergeSort with "+numberOfElements +" elements is "+runTimeMergeSort+" seconds") ;
 
+        */
 
 
 
