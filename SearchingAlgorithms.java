@@ -93,7 +93,26 @@ public class SearchingAlgorithms {
       *
       * */
 
-    
+      public static int interpolationSearch(int[]array , int toBeFound){
+        
+        int low = 0 , high = array.length - 1 ; 
+
+        //the element should be present in between the high and low indices 
+        
+        while(toBeFound>= array[low] && toBeFound <= array[high] && low <= high){
+                
+                int position = ((high - low )/(array[high] - array[low])) * (toBeFound - array[low]) ;
+
+                if(array[position]== toBeFound){return position ; }
+                
+                // if toBeFound is larger , it is in the upper part  
+                if(array[position]<toBeFound){ low = position + 1 ; }
+
+                else{ high = position -1 ; }
+        }
+        return -1 ; 
+      }
+
 
 
 }
