@@ -32,22 +32,73 @@ public class TestClassSearch {
            System.out.println("The time for Linear Search ="+ differenceLinearSearch+" nanoSeconds") ;
        }
 
-       // running Binary Search
+        // running Binary Search
         int[] arrayForBinarySearch = TestClass.randomArray(100,sizeOfArray) ;
-       long startBinarySearch = System.nanoTime() ;
-       int positionBinarySearch = SearchingAlgorithms.binarySearch(arrayForBinarySearch,0,arrayForBinarySearch.length,toBeFound)  ;
-       long endBinarySearch = System.nanoTime() ;
-       long differenceBinarySearch = endBinarySearch - startBinarySearch ;
+        SortingAlgorithms.insertionSort(arrayForBinarySearch); // sorting the array first
 
-       if(positionBinarySearch==-1){
+        long startBinarySearch = System.nanoTime() ;
+        int positionBinarySearch = SearchingAlgorithms.binarySearch(arrayForBinarySearch,0,arrayForBinarySearch.length,toBeFound)  ;
+        long endBinarySearch = System.nanoTime() ;
+        long differenceBinarySearch = endBinarySearch - startBinarySearch ;
+
+        if(positionBinarySearch==-1){
 
            System.out.println("The randomly generated element"+ toBeFound+"does not exist in the randomly generated array") ;
            System.out.println("The time for Linear Search ="+ differenceBinarySearch+" nanoSeconds") ;
-       }
-       else{
-           System.out.println("The randomly generated element" + toBeFound + "is present at " + position + " in the array");
+        }
+        else{
+           System.out.println("The randomly generated element" + toBeFound + "is present at " + positionBinarySearch + " in the array");
            System.out.println("The time for Binary Search ="+ differenceBinarySearch+" nanoSeconds") ;
-       }
+        }
+
+
+
+        // running JumpSearch
+
+        int[] arrayJumpSearch = TestClass.randomArray(100,sizeOfArray) ;
+        SortingAlgorithms.insertionSort(arrayJumpSearch);// sorting the array
+
+        long startTimeJumpSearch = System.nanoTime();
+        int positionJumpSearch = SearchingAlgorithms.jumpSearch(arrayJumpSearch,toBeFound) ;
+        long endTimeJumpSearch = System.nanoTime() ;
+        long differenceJumpSearch = endTimeJumpSearch - startTimeJumpSearch ;
+
+        if(positionJumpSearch==-1){
+            System.out.println("The randomly generated element"+toBeFound+" does not exist in the randomly generated array") ;
+            System.out.println("The time for Jump Search =" + differenceJumpSearch+" nanoSeconds") ;
+        }
+        else{
+            System.out.println("The randomly generated element"+toBeFound+" is present at "+positionJumpSearch+" in the array") ;
+            System.out.println("The time for Jump Search = "+ differenceJumpSearch+" nanoSeconds") ;
+
+        }
+
+
+        // running interpolation search
+        /** Interpolation search requires the the array to be sorted
+        *Worst case runtime = O(log(log n ))
+         */
+
+        int[] arrayInterpolationSearch = TestClass.randomArray(100,sizeOfArray) ;
+        // sorting the array  of elements first
+        SortingAlgorithms.insertionSort(arrayInterpolationSearch);
+        long startTimeInterpolationSearch = System.nanoTime() ;
+        long endTimeInterpolationSearch = System.nanoTime() ;
+        // running interpolation search
+        int positionInterpolationSearch = SearchingAlgorithms.interpolationSearch(arrayInterpolationSearch, toBeFound) ;
+        long differenceInterpolationSearch = endTimeInterpolationSearch - startTimeInterpolationSearch ;
+
+        if(positionInterpolationSearch==-1){
+            System.out.println("The randomly generated element"+toBeFound+"is not present in the randomly generated array") ;
+            System.out.println("The time for interpolation search is "+ differenceInterpolationSearch+" nanoSeconds") ;
+        }
+        else{
+            System.out.println("The randomly generated element "+ toBeFound+" is present at "+ positionInterpolationSearch +" in the array");
+            System.out.println("The time for Interpolation Search is"+ differenceInterpolationSearch+" nanoSeconds") ;
+        }
+
+
+
 
     }
 }
