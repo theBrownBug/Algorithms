@@ -123,24 +123,22 @@ public class TestClass {
 
 
 
-        /*
+
 
         // calling MergeSort
         System.out.println("Merge Sort") ;
         System.out.println("Array to be sorted: ") ;
         int [] arrayToBeSortedMerge = TestClass.randomArray(upperBound, numberOfElements);
         long startTimeMergeSort = System.nanoTime() ;
-        //int leftStart  = 0 ;
-        //int rightEnd   = arrayToBeSorted.length-1 ;
-
         SortingAlgorithms.mergeSort(arrayToBeSortedMerge,0,arrayToBeSortedMerge.length-1);
+
         long endTimeMergeSort = System.nanoTime() ;
         long runTimeMergeSort = (endTimeMergeSort - startTimeMergeSort) ;
         for(int iterator : arrayToBeSortedMerge){ System.out.print(iterator+ " " ); } // print the elements after sorting
         System.out.println() ;
         System.out.println("The runtime of MergeSort with "+numberOfElements +" elements is "+runTimeMergeSort+" seconds") ;
 
-        */
+
 
 
 
