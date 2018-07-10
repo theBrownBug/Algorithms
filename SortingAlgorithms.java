@@ -96,80 +96,77 @@ public final class SortingAlgorithms {
         }
     }
 
-    /*
-     * Merge Subroutine of mergeSort takes big O(n) Time Complexity
+
+
+    /**
+     *
+     * MERGE SORT :
+     *
+     * 1.merge subroutine :
      * */
 
-    public static void merge(int[] array , int leftStart , int middle , int rightEnd){
+    public static void merge(int[] array , int left , int right , int middle){
 
-         int firstSortedArrSize  = middle - leftStart+1   ;
-         int secondSortedArrSize = rightEnd - middle ;
+        int leftArrSize = middle - left + 1 ;
+        int rightArrSize = right - middle;
 
-         // both the arrays which contain the sorted elements
-         int[] leftSortedArr = new int[firstSortedArrSize] ;
-         int[] rightSortedArr = new int[secondSortedArrSize] ;
+        int[] leftArray = new int[leftArrSize] ;
+        int[] rightArray= new int[rightArrSize];
 
-         // assigning elements in the left subarray
-         // how  to fix this
-         for(int counter = 0 ; counter<firstSortedArrSize ; counter++){ leftSortedArr[counter] = array[leftStart+counter ] ;}
-         //assigning elements in the right subarray
-         for(int counter = 0 ; counter<secondSortedArrSize ; counter++){rightSortedArr[counter] = array[counter+middle+1] ; }
+        // creating the left and right subArrays... takes extra O(n) space
+        for(int counter = 0 ; counter <  leftArrSize; counter++){
+            leftArray[counter] = array[left+counter] ;
+        }
+        for(int counter = 0 ; counter<rightArrSize ; counter++){
+            rightArray[counter] = array[middle+1+counter] ;
+        }
 
+        int i = 0,  j= 0 , k = left ;
 
-         int firstCounter = 0 ,  secondCounter = 0 , counter =  0 ;
+        while(i<leftArrSize && j< rightArrSize){
 
-         // now merging
-         while(firstCounter < firstSortedArrSize && secondCounter < secondSortedArrSize){
+            if(leftArray[i]<= rightArray[j]){
+                array[k]  = leftArray[i] ;
+                i++ ;
+            }
+            else{
+                array[k] = rightArray[j] ;
+                j++ ;
+            }
+            k++ ;
+        }
 
-             if(leftSortedArr[firstCounter]<= rightSortedArr[secondCounter]){
+        // copying the rest of the elements
 
-                 array[counter] = leftSortedArr[firstCounter] ;
-                 firstCounter+=1 ;
-             }
-             else{
-                 array[counter] = rightSortedArr[secondCounter] ;
-                 secondCounter+=1 ;
-             }
-             counter ++ ;
-         }
-         // code for copying rest of the elements in the array
+        while(i<leftArrSize){
+                array[k]  = leftArray[i] ;
+                i++ ;
+                k++ ;
+        }
 
-        while(secondCounter<secondSortedArrSize){
+        while(j<rightArrSize){
+            array[k] = rightArray[j] ;
+            j++ ;
+            k++ ;
+        }
 
-                 array[counter]  = rightSortedArr[secondCounter]  ;
-                 secondCounter++ ;
-                 counter++ ;
-             }
+    }
 
-             while(firstCounter<firstSortedArrSize){
-                 array[counter] = leftSortedArr[firstCounter] ;
-                 firstCounter++ ;
-                 counter++ ;
-             }
-         }
-
-
-
-
-
-    /*
-     * runTime big O(n ( log(n) ) )
+    /**
+     * 2 . sort algorithm
+     *
      * */
 
-    public static void mergeSort(int[] array , int leftStart , int rightEnd){
+    public static void mergeSort(int[] array , int left , int right){
 
+        if(left< right){
+            int middle = (left+right)/2 ;
 
+            SortingAlgorithms.mergeSort(array, left , middle);
+            SortingAlgorithms.mergeSort(array, middle+1 , right);
+            SortingAlgorithms.merge(array, left , right , middle);
 
-
-         if(leftStart <rightEnd){
-             // why not this
-             int middle = (int) Math.floor((leftStart+rightEnd)/2)  ;
-             //int middle = (int) (leftStart+(rightEnd-leftStart)/2)  ; // as per
-             mergeSort(array, leftStart,middle);
-             mergeSort(array,middle+1, rightEnd);
-             SortingAlgorithms.merge(array,leftStart,middle,rightEnd);
-         }
-     }
-
+        }
+    }
 
 }
