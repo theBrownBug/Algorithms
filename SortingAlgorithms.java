@@ -169,4 +169,60 @@ public final class SortingAlgorithms {
         }
     }
 
+
+    /**
+     * heapSort Algorithms :
+     *
+     * */
+
+    public void heapSort(int[] array){
+        int arrayLength =array.length ;
+        for(int counter = (arrayLength/2) ; counter>= 0; counter--){
+            SortingAlgorithms.maxHeapify(array, counter , arrayLength);
+        }
+
+        for(int counter = arrayLength- 1;counter>=0 ; counter--){
+            int temp = array[0] ;
+            array[0] = array[counter] ;
+            array[counter] = temp ;
+            // call max - heapify on the reduced heap ...
+            SortingAlgorithms.maxHeapify(array, );
+        }
+
+    }
+
+    /**
+     *  Heapify subRoutine
+     *
+     *  To Heapify
+     * */
+
+    public static void maxHeapify(int[] array , int node , int heapSize){
+        int largest    = node ;
+        int leftChild  = 2*node + 1;
+        int rightChild = 2* node + 2 ;
+
+        // if the  left child is larger than the root
+        if(leftChild < heapSize && array[leftChild]> array[largest]){
+
+            largest = leftChild;
+        }
+
+
+        if(rightChild< heapSize && array[rightChild]< array[largest]){
+            largest = rightChild ;
+        }
+        // if the largest element is not the original node , then swap the elments and recursively call the method
+        // until the heap property is satisfied
+
+        if(largest != node){
+            // swap
+            int swap = array[node] ;
+            array[node] = array[largest] ;
+            array[largest] = swap ;
+
+            maxHeapify(array ,largest , heapSize) ;
+        }
+    }
+
 }
