@@ -186,7 +186,7 @@ public final class SortingAlgorithms {
             array[0] = array[counter] ;
             array[counter] = temp ;
             // call max - heapify on the reduced heap ...
-            SortingAlgorithms.maxHeapify(array, );
+            SortingAlgorithms.maxHeapify(array,0  , counter );
         }
 
     }
