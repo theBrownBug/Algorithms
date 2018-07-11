@@ -175,7 +175,7 @@ public final class SortingAlgorithms {
      *
      * */
 
-    public void heapSort(int[] array){
+    public static void heapSort(int[] array){
         int arrayLength =array.length ;
         for(int counter = (arrayLength/2) ; counter>= 0; counter--){
             SortingAlgorithms.maxHeapify(array, counter , arrayLength);
@@ -224,5 +224,69 @@ public final class SortingAlgorithms {
             maxHeapify(array ,largest , heapSize) ;
         }
     }
+
+
+
+
+    /*
+    * NON COMPARISION SORTS
+    * */
+
+
+    /*
+    * Supporting function for counting sort
+    *
+    */
+    public static int maxElement(int[] array){
+
+        int maxElement = 0 ;
+
+        for(int counter = 0 ; counter< array.length ; counter++){
+            if(array[counter]>=maxElement){
+                maxElement = array[counter] ;
+            }
+        }
+
+        return maxElement ;
+    }
+
+    /**
+     *Counting sort
+     *
+     * @param originalArray : The Array to be Sorted
+     * @param resultantArray: The output array
+     *
+     */
+
+    public static void countingSort(int[] originalArray , int[] resultantArray){
+
+        int maxElement = SortingAlgorithms.maxElement(originalArray) ;
+        int[] tempArray = new int[maxElement] ;
+
+        for(int counter = 0 ; counter< tempArray.length ; counter++){
+                tempArray[counter] = 0  ;
+        }
+
+        // tempArray[i] contains the number of elements equal to i ;
+        for(int counter = 0; counter<originalArray.length ; counter++){
+            tempArray[originalArray[counter]] = tempArray[originalArray[counter]] + 1 ;
+        }
+
+        for(int i = 0 ; i<maxElement ; i++){
+            tempArray[i] = tempArray[i] + tempArray[i-1] ;
+        }
+        // tempArray now contains the number of element less than or equal to i
+
+        for(int counter = originalArray.length -1 ; counter>= 0 ; counter--){
+            resultantArray[tempArray[originalArray[counter]]] = originalArray[counter] ;
+            tempArray[originalArray[counter]] = tempArray[originalArray[counter]] -1 ;
+        }
+    }
+
+
+    /**
+     * RADIX SORT
+     *
+     * */
 
 }

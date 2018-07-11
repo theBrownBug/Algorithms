@@ -137,6 +137,43 @@ public class TestClass {
         for(int iterator : arrayToBeSortedMerge){ System.out.print(iterator+ " " ); } // print the elements after sorting
         System.out.println() ;
         System.out.println("The runtime of MergeSort with "+numberOfElements +" elements is "+runTimeMergeSort+" seconds") ;
+        System.out.println() ;
+
+
+        // calling HEAP SORT
+
+        System.out.println("HEAP SORT ");
+        System.out.println("Array to be Sorted: ") ;
+        int[] arrayToBeSortedHeap = TestClass.randomArray(upperBound,numberOfElements) ;
+        long startTimeHeapSort = System.nanoTime()  ;
+        SortingAlgorithms.heapSort(arrayToBeSortedHeap);
+
+        long endTimeHeapSort = System.nanoTime() ;
+        long runTimeHeapSort = endTimeHeapSort - startTimeHeapSort ;
+        for(int elements: arrayToBeSortedHeap){System.out.print(elements+" ") ; } // print the elements after sorting
+        System.out.println() ;
+        System.out.println("The runtime of HeapSort with"+ numberOfElements+" elements is "+ runTimeHeapSort+" seconds") ;
+        System.out.println();
+
+
+        // calling Counting Sort
+        System.out.println("Counting Sort : ") ;
+        System.out.println("Array to be sorted: ") ;
+        int[] arrayToBeSortedCounting = TestClass.randomArray(upperBound, numberOfElements) ;
+        long startTimeCountingSort = System.nanoTime();
+        int[] resultArrayCounting = new int[arrayToBeSortedCounting.length]  ;
+        SortingAlgorithms.countingSort(arrayToBeSortedCounting , resultArrayCounting);
+        long endTimeCountingSort = System.nanoTime() ;
+        long runTimeCountingSort = endTimeCountingSort - startTimeCountingSort ;
+
+        //for
+        for(int elements: resultArrayCounting){
+            System.out.println(elements+" ") ;
+        }
+        System.out.println("The runtime of Counting Sort :"+numberOfElements+" is :"+ runTimeCountingSort+" seconds") ;
+
+
+        // calling radix sort
 
 
 
