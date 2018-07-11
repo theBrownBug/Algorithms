@@ -136,7 +136,7 @@ public class TestClass {
         long runTimeMergeSort = (endTimeMergeSort - startTimeMergeSort) ;
         for(int iterator : arrayToBeSortedMerge){ System.out.print(iterator+ " " ); } // print the elements after sorting
         System.out.println() ;
-        System.out.println("The runtime of MergeSort with "+numberOfElements +" elements is "+runTimeMergeSort+" seconds") ;
+        System.out.println("The runtime of MergeSort with "+numberOfElements +" elements is "+runTimeMergeSort+" nanoseconds") ;
         System.out.println() ;
 
 
@@ -152,8 +152,22 @@ public class TestClass {
         long runTimeHeapSort = endTimeHeapSort - startTimeHeapSort ;
         for(int elements: arrayToBeSortedHeap){System.out.print(elements+" ") ; } // print the elements after sorting
         System.out.println() ;
-        System.out.println("The runtime of HeapSort with"+ numberOfElements+" elements is "+ runTimeHeapSort+" seconds") ;
+        System.out.println("The runtime of HeapSort with"+ numberOfElements+" elements is "+ runTimeHeapSort+" nanoseconds") ;
         System.out.println();
+
+        // calling Shell Sort
+        System.out.println("SHELL SORT :") ;
+        System.out.println("Array to be sorted :") ;
+        int[] arrayToBeSortedShell = TestClass.randomArray(upperBound,numberOfElements) ;
+        long startTimeShellSort = System.nanoTime() ;
+        SortingAlgorithms.shellSort(arrayToBeSortedShell);
+        long endTimeShellSort = System.nanoTime() ;
+        long runTimeShellSort = endTimeShellSort - startTimeShellSort ;
+        for(int element :arrayToBeSortedShell){
+            System.out.print(element+" ") ;
+        }
+        System.out.println("The runTime of Shell Sort with "+numberOfElements+" elements is"+runTimeShellSort+" nanoSeconds")  ;
+
 
 
         // calling Counting Sort
@@ -170,7 +184,7 @@ public class TestClass {
         for(int elements: resultArrayCounting){
             System.out.println(elements+" ") ;
         }
-        System.out.println("The runtime of Counting Sort :"+numberOfElements+" is :"+ runTimeCountingSort+" seconds") ;
+        System.out.println("The runtime of Counting Sort :"+numberOfElements+" is :"+ runTimeCountingSort+" nanoseconds") ;
 
 
         // calling radix sort
