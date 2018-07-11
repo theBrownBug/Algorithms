@@ -226,6 +226,25 @@ public final class SortingAlgorithms {
     }
 
 
+    public static void shellSort(int[] array){
+        int arrayLength = array.length;
+        // start with a big gap and reduce the gap
+
+        for(int gap = arrayLength/2 ; gap> 0 ; gap/=2){
+
+            // do insertion sort for each of the gapped size subArrays
+            for(int i = gap ; i< arrayLength ; i++){
+                int temp = array[i] ;
+
+                int  j ;
+                for( j = i ; j>= gap && array[j-gap] > temp ; j-= gap){
+                    array[j] = array[j - gap] ;
+                }
+                array[j] = gap ;
+            }
+        }
+    }
+
 
 
     /*
@@ -285,8 +304,18 @@ public final class SortingAlgorithms {
 
 
     /**
-     * RADIX SORT
+     * RADIX SORT : RUN COMPARISION SORT N Number of times ,
+     * Counting sort(stable) is a subroutine of Radix Sort
      *
      * */
+
+    public static void radixSort(int[] array){
+
+        int maxElement = SortingAlgorithms.maxElement(array) ;
+        // do counting sort for every Digit
+        for(int exp= 1 ; maxElement/exp> 0 ; exp*=10){
+            SortingAlgorithms.countingSort(array, );
+        }
+    }
 
 }
