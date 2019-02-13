@@ -25,8 +25,8 @@ public class BinaryTree {
     }
 
     public Node root ;
-    public BinaryTree(int key){ this.root = new Node(key) ;}
-    public BinaryTree(){ setRoot(null); }
+    public BinaryTree(int key){ setRoot(new Node(key)) ;}
+    public BinaryTree(){ this.root = null ;  }
 
 
     public void insert(BinaryTree tree, Node node){
@@ -39,7 +39,7 @@ public class BinaryTree {
         }
         node.setParent(trailingPointer);
         if(trailingPointer==null){ tree.setRoot(node); }
-        if(node.getKey()>trailingPointer.getKey()){trailingPointer.setLeft(node);}
+        else if(node.getKey()>trailingPointer.getKey()){trailingPointer.setLeft(node);}
         else{trailingPointer.setRight(node) ; }
     }
     // O(h)
@@ -143,11 +143,9 @@ public class BinaryTree {
 
     public static void main(String args[]){
         Scanner input = new Scanner(System.in) ;
-        System.out.println("Enter the number of nodes to be created") ;
         BinaryTree tree = null ;
         int iterator =  0 ;
-        while(iterator!= -1){
-            iterator = Integer.parseInt(input.nextLine().trim()) ;
+        do{
             System.out.println("Select one of the options : ") ;
             System.out.println("1.  Create a random tree  with random number of nodes");
             System.out.println("2.  Create a random tree with specified number of nodes");
@@ -159,80 +157,85 @@ public class BinaryTree {
             System.out.println("8.  Find Successor");
             System.out.println("9.  Find Predecessor");
             System.out.println("-1. Exit the program");
+            iterator = Integer.parseInt(input.nextLine().trim()) ;
 
             switch (iterator){
-                    case(1):
-                        randomTree(tree);
-                        break ;
-                    case(2):
-                        int numberOfNodes = Integer.parseInt(input.nextLine().trim()) ;
-                        randomTree(tree, numberOfNodes);
-                    case(3):
-                        tree = new BinaryTree() ;
-                        break ;
-                    case(4):
-                        if(tree!=null){
-                            System.out.println("Enter the key of the node") ;
-                            int key = Integer.parseInt(input.nextLine().trim()) ;
-                            Node node = tree.new Node(key) ;
-                            tree.insert(tree, node);
-                        }else{System.out.println("Create a new tree first");}
-                    case(5):
-                        if(tree!=null) {
-                            System.out.println("Enter the key of the node to be deleted");
-                            int key = Integer.parseInt(input.nextLine().trim()) ;
-                            Node toBeDeleted = tree.search(tree.getRoot() , key) ;
-                            if(toBeDeleted ==null){
-                                System.out.println("There is no node with the specified key") ;
+                case(1):
+                    tree = new BinaryTree() ;
+                    BinaryTree.randomTree(tree);
+                    break ;
+                case(2):
+                    tree = new BinaryTree() ;
+                    int numberOfNodes = Integer.parseInt(input.nextLine().trim()) ;
+                    randomTree(tree, numberOfNodes);
+                case(3):
+                    tree = new BinaryTree() ;
+                    break ;
+                case(4):
+                    if(tree!=null){
+                        System.out.println("Enter the key of the node") ;
+                        int key = Integer.parseInt(input.nextLine().trim()) ;
+                        Node node = tree.new Node(key) ;
+                        tree.insert(tree, node);
+                    }else{System.out.println("Create a new tree first");}
+                case(5):
+                    if(tree!=null) {
+                        System.out.println("Enter the key of the node to be deleted");
+                        int key = Integer.parseInt(input.nextLine().trim()) ;
+                        Node toBeDeleted = tree.search(tree.getRoot() , key) ;
+                        if(toBeDeleted ==null){
+                            System.out.println("There is no node with the specified key") ;
                             break ;
                         }
-                            else{ tree.deleteNode(tree, toBeDeleted); break ; }
-                        } else{System.out.println("Create a new tree first");}
-                        break ;
-                    case(6):
-                        if(tree!=null){
-                            Node max = tree.getMaximum(tree.getRoot()) ;
-                            System.out.println("The node with maximum key is "+ max.getKey()) ;
-                        }else{System.out.println("Create a new tree first");}
-                        break ;
-                    case(7):
-                        if(tree!=null){
-                            Node min = tree.getMinimum(tree.getRoot()) ;
-                            System.out.println("The node with the minimum key is"+ min.getKey()) ;
-                        } else{ System.out.println("Create a new tree first") ;}
-                        break ;
-                    case(8):
-                        if(tree!=null){
-                            System.out.println("Enter the key of node to find its successor") ;
-                            int key = Integer.parseInt(input.nextLine().trim()) ;
-                            Node toBeFound = tree.search(tree.getRoot() , key) ;
-                            if(toBeFound!=null){
-                                Node successor = tree.getSuccessor(toBeFound);
-                                System.out.println("The successor of the node  with the key "+toBeFound.getKey()+" is "+ successor.getKey()) ;
-                            } else{ System.out.println("Node not found"); break ; }
-                        }else{System.out.println("Create a new tree first");}
-                        break ;
-                    case (9):
-                        if(tree!=null){
-                            System.out.println("Enter the key of node to find its predecessor") ;
-                            int key = Integer.parseInt(input.nextLine().trim()) ;
-                            Node toBeFound = tree.search(tree.getRoot() , key) ;
-                            if(toBeFound!=null){
-                                Node pred = tree.getPredecessor(toBeFound);
-                                System.out.println("The Predecessor of the node  with the key "+toBeFound.getKey()+" is "+ pred.getKey()) ;
-                            } else{ System.out.println("Node not found"); break ; }
-                        }else{System.out.println("Create a new tree first");}
-                        break ;
-                    case(-1):
-                        System.exit(0);
-                        break;
-                    default:
-                        System.out.println("Enter a valid option from the above");
-                        break ;
+                        else{ tree.deleteNode(tree, toBeDeleted); break ; }
+                    } else{System.out.println("Create a new tree first");}
+                    break ;
+                case(6):
+                    if(tree!=null){
+                        Node max = tree.getMaximum(tree.getRoot()) ;
+                        System.out.println("The node with maximum key is "+ max.getKey()) ;
+                    }else{System.out.println("Create a new tree first");}
+                    break ;
+                case(7):
+                    if(tree!=null){
+                        Node min = tree.getMinimum(tree.getRoot()) ;
+                        System.out.println("The node with the minimum key is"+ min.getKey()) ;
+                    } else{ System.out.println("Create a new tree first") ;}
+                    break ;
+                case(8):
+                    if(tree!=null){
+                        System.out.println("Enter the key of node to find its successor") ;
+                        int key = Integer.parseInt(input.nextLine().trim()) ;
+                        Node toBeFound = tree.search(tree.getRoot() , key) ;
+                        if(toBeFound!=null){
+                            Node successor = tree.getSuccessor(toBeFound);
+                            System.out.println("The successor of the node  with the key "+toBeFound.getKey()+" is "+ successor.getKey()) ;
+                        } else{ System.out.println("Node not found"); break ; }
+                    }else{System.out.println("Create a new tree first");}
+                    break ;
+                case (9):
+                    if(tree!=null){
+                        System.out.println("Enter the key of node to find its predecessor") ;
+                        int key = Integer.parseInt(input.nextLine().trim()) ;
+                        Node toBeFound = tree.search(tree.getRoot() , key) ;
+                        if(toBeFound!=null){
+                            Node pred = tree.getPredecessor(toBeFound);
+                            System.out.println("The Predecessor of the node  with the key "+toBeFound.getKey()+" is "+ pred.getKey()) ;
+                        } else{ System.out.println("Node not found"); break ; }
+                    }else{System.out.println("Create a new tree first");}
+                    break ;
+                case(-1):
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Enter a valid option from the above");
+                    break ;
 
             }
 
         }
+        while(iterator!= -1) ;
 
     }
 }
+
