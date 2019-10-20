@@ -1,6 +1,7 @@
 package Questions.Facebook;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TripletZero {
 
@@ -36,6 +37,99 @@ public class TripletZero {
     }
 
 
+    /**
+     *
+     * O(n^2) complexity
+     *
+     * */
+    public static ArrayList<ArrayList<Integer>> advancedMethod(int[] array ,int length){
+        ArrayList<ArrayList<Integer>> allTriplets = new ArrayList<>() ;
+        int[] sortedArray = Arrays.copyOf(array , length);
+        mergeSort(sortedArray , 0 , length - 1) ;
+        //Arrays.sort(sortedArray);
+        boolean found = false ;
+
+        for(int counter = 0 ; counter < length - 1; counter++){
+            int left = counter + 1;
+            int right = length - 1 ;
+            int x = sortedArray[counter];
+
+            while(left < right){
+                if((x + sortedArray[left] +sortedArray[right]) == 0){
+                    ArrayList<Integer> newList= new ArrayList<>() ;
+                    newList.add(x) ;
+                    newList.add(sortedArray[left]) ;
+                    newList.add(sortedArray[right]) ;
+                    allTriplets.add(newList) ;
+
+                    left++ ;
+                    right-- ;
+                    found = true ;
+                }
+                else if((sortedArray[left] + sortedArray[right] + x) < 0){
+                    left++ ;
+                }
+                else{
+                    right-- ;
+                }
+
+            }
+        }
+
+        if(!found){return null ; }
+        return allTriplets ;
+    }
+
+    public static void merge(int[] array , int left, int middle , int right){
+        int leftSize = middle - left +1 ;
+        int rightSize = right - middle ;
+        int[] leftArray = new int[leftSize] ;
+        int[] rightArray = new int[rightSize] ;
+        for(int counter = 0 ; counter< leftSize ; counter++){
+            leftArray[counter] = array[left +counter] ;
+        }
+        for(int counter = 0 ; counter< rightSize ; counter++){
+            rightArray[counter] = array[middle + 1 + counter] ;
+        }
+
+        // merge
+        int i = 0 , j = 0 , k = left ;
+        while(i< leftSize && j< rightSize){
+            if(leftArray[i]<= rightArray[j]){
+                array[k]= leftArray[i] ;
+                i++ ;
+            }
+            else{
+                array[k] = rightArray[j] ;
+                j++ ;
+            }
+            k++ ;
+        }
+
+        // copy the rest of the elements
+        while(i< leftSize){
+            array[k] = leftArray[i] ;
+            i++ ; k++ ;
+        }
+
+        while(j < rightSize){
+            array[k] = rightArray[j] ;
+            j++ ; k++ ;
+        }
+
+
+
+    }
+    public static void mergeSort(int[] array , int left , int right){
+        if(left< right){
+            int middle = (left + right) / 2;
+            mergeSort(array , left , middle);
+            mergeSort(array, middle + 1, right);
+            merge(array , left , middle , right);
+        }
+    }
+
+
 
 
 
@@ -57,7 +151,24 @@ public class TripletZero {
         }
 
         System.out.println() ;
-        System.out.println() ;
+        System.out.println("O(n^2 method .. includes sorting)") ;
+        ArrayList<ArrayList<Integer>> triplets = TripletZero.advancedMethod(array , array.length) ;
+        if(triplets == null){
+            System.out.println("No triplets found");
+        }
+        else{
+
+            for(int counter = 0 ; counter< triplets.size() ; counter++){
+                for(int c = 0 ; c< triplets.get(counter).size() ; c++){
+                    System.out.print( triplets.get(counter).get(c) + " ");
+                }
+                System.out.println();
+            }
+        }
+
+
+
+
 
     }
 
