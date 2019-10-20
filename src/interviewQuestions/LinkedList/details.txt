@@ -1,0 +1,9 @@
+LinkedList is a linear data structure which consists of nodes holding
+a data field and a reference to another node. For more LinkedList features and capabilities, have a look at this article here.
+
+Let’s present the average estimate of the time we need to perform some basic operations:
+
+add() – supports O(1) constant-time insertion at any position
+get() – searching for an element takes O(n) time
+remove() – removing an element also takes O(1) operation, as we provide the position of the element
+contains() – also has O(n) time complexity
