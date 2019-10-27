@@ -14,7 +14,6 @@ public class LFUCache {
             this.value = value ;
             this.count = count ;
         }
-
     }
 
     int minFreq , capacity ;
