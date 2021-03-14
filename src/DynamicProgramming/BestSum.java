@@ -19,8 +19,9 @@ public class BestSum {
         ArrayList<Integer> smallest = null ;
         for(int number : array){
             int remainder = target - number ;
-            ArrayList<Integer> out = bestSum(target , array) ;
+            ArrayList<Integer> out = bestSum(remainder , array) ;
             if(out != null){
+                out.add(number);
                 if(smallest== null || smallest.size()> out.size()){
                     smallest = out ;
                 }
@@ -30,11 +31,36 @@ public class BestSum {
 
         return smallest ;
     }
-    /*
+
+
     public ArrayList<Integer> bestSumDP(int target , int[] array){
+        HashMap<Integer , ArrayList<Integer>> map = new HashMap<>();
+        return bestSumDPSubRoutine( target , array , map);
+    }
+
+
+
+    public ArrayList<Integer> bestSumDPSubRoutine(int target, int[] array ,HashMap<Integer , ArrayList<Integer>> map){
+        if(map.containsKey(target)){return map.get(target); }
+        if(target ==0 ){ return new ArrayList<>() ; }
+        if(target<0){return null ; }
+
+        ArrayList<Integer>smallest = null;
+        for(int number : array){
+            int remainder = target - number;
+            ArrayList<Integer> out = bestSumDPSubRoutine(remainder , array , map);
+            if(out!=null){
+                out.add(number);
+                if(smallest== null || smallest.size()> out.size()){
+                    smallest = out ;
+
+                }
+            }
+        }
+        map.put(target, smallest);
+        return smallest ;
 
     }
-    */
 
 
 }
