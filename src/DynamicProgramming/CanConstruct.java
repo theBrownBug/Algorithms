@@ -4,6 +4,13 @@ import java.util.* ;
 public class CanConstruct {
 
 
+    /***
+     * Problem :
+     *  - Given a string and a word bank,
+     *      return true if the target can be formed from the strings in the word bank
+     *      false otherwise
+     *
+     * */
 
     public static boolean canConstructNormal(String target , ArrayList<String> substrings){
         if (target.equals("")){return true ; }
