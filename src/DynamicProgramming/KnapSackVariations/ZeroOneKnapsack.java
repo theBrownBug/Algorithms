@@ -43,13 +43,13 @@ public class ZeroOneKnapsack {
         if(array[size][capacity]!=-1){return array[size][capacity]; }
 
         if(weights[size-1]<= capacity){
-            array[size][capacity] = (int) Math.max(values[size - 1] + zeroOneKnapsackNormal(weights, values, capacity - weights[size -1], size -1 ) ,
-                    zeroOneKnapsackNormal(weights , values , capacity , size  - 1)
+            array[size][capacity] = (int) Math.max(values[size - 1] + zeroOneKnapsackDPSubRoutine(weights, values, capacity - weights[size -1], size -1 , array ) ,
+                    zeroOneKnapsackDPSubRoutine(weights , values , capacity , size  - 1 , array)
             );
 
         }
         else{
-            array[size][capacity] = zeroOneKnapsackNormal(weights , values , capacity , size - 1);
+            array[size][capacity] = zeroOneKnapsackDPSubRoutine(weights , values , capacity , size - 1 , array);
 
         }
         return array[size][capacity];
