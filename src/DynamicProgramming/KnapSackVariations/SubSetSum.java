@@ -61,17 +61,6 @@ public class SubSetSum {
         return false;
     }
 
-    /*
-
-    public boolean subSetSumDP(ArrayList<Integer> array , int target){
-
-    }
-
-    public boolean subSetSumDPSubRoutine(ArrayList<Integer> array, int target , int){
-
-    }
-
-    */
 
     public static void main(String args[]){
 
