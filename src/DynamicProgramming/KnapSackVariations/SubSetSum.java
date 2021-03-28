@@ -52,7 +52,7 @@ public class SubSetSum {
 
             newList.remove(counter);
 
-            if(subSetSumNormal(newList , remainder)){
+            if(subSetSumDPSubRoutine(newList , remainder, map)){
                 map.put(newList , true);
                 return true ;
             }
