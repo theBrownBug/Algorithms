@@ -14,7 +14,9 @@ public class ZeroOneKnapsack {
         // make the choice diagram
         if(weights[size-1]<=capacity){
             return (int) Math.max(values[size - 1] + zeroOneKnapsackNormal(weights, values, capacity - weights[size -1], size -1 ) ,
-                    zeroOneKnapsackNormal(weights , values , capacity , size  - 1)
+                    zeroOneKnapsackNormal(weights ,
+
+                            values , capacity , size  - 1)
                     );
         }
         else{
@@ -54,4 +56,7 @@ public class ZeroOneKnapsack {
         }
         return array[size][capacity];
     }
+
+
+
 }

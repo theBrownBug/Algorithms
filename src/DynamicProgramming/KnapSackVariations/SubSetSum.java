@@ -25,46 +25,49 @@ public class SubSetSum {
     }
 
 
-    public static boolean subSetSumDP(ArrayList<Integer> array , int target){
-        HashMap<ArrayList<Integer> , Boolean> map = new HashMap<>() ;
+    public static boolean subSetSumDP(int[] array , int target){
+        /*
+        * this is a variation of Knapsack
+        * */
+        Boolean[][] memo = new Boolean[array.length + 1][target+1] ;
 
-        return subSetSumDPSubRoutine(array , target , map);
+        //initialise\
+        /**
+         * target =0 for all subset sizes will be true by default
+         * */
+        for(int c = 0 ; c<array.length ; c++){
+            memo[c][0] = Boolean.TRUE ;
+        }
+
+        return subSetSumDPSubRoutine(array, target , memo , array.length);
     }
 
-    /**
-     *  Design needs to improved
-     *  Because Using mutable arrayList as a key is not good design
-     *
-     * */
-    public static boolean subSetSumDPSubRoutine(ArrayList<Integer> array , int target , HashMap<ArrayList<Integer> , Boolean> map){
-        if(map.containsKey(array)){
-            return map.get(array);
-        }
-        if(target == 0){
+    public static boolean subSetSumDPSubRoutine(int[] array , int target , Boolean[][] memo , int index){
+        if(target==0){
             return true ;
         }
-        if(target!=0 && array.size()==0){ return false; }
-        if(target<0){ return false ; }
-
-        for(int counter = 0  ; counter<array.size()  ; counter++){
-            int remainder = target - (int)array.get(counter);
-            ArrayList<Integer> newList = new ArrayList<>(array);
-
-            newList.remove(counter);
-
-            if(subSetSumDPSubRoutine(newList , remainder, map)){
-                map.put(newList , true);
-                return true ;
-            }
+        else if(target<0 || index==0){return false; }
+        else if(memo[index][target]!=null){
+            return memo[index][target];
         }
-        map.put(array , false);
-        return false;
+        else if(array[index - 1]<= target){
+            memo[index][target] = subSetSumDPSubRoutine(array , target - array[index -1] , memo , index - 1)
+                    || subSetSumDPSubRoutine(array, target , memo , index - 1);
+
+            return memo[index][target];
+        }
+        else{
+            memo[index][target] = memo[index-1][target];
+            return memo[index][target];
+        }
     }
+
+
+
 
 
     public static void main(String args[]){
-
-        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(2,3,5,7,8));
+        int[] list = new int[]{2,3,5,7,8};
         int target = 10 ;
         System.out.println(subSetSumDP(list , target));
 
