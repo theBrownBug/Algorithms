@@ -35,20 +35,27 @@ public class SubSetSum {
         /**
          * target =0 for all subset sizes will be true by default
          * */
-        for(int c = 0 ; c<array.length ; c++){
+        for(int c = 0 ; c<memo.length ; c++){
             memo[c][0] = Boolean.TRUE ;
         }
 
-        return subSetSumDPSubRoutine(array, target , memo , array.length);
+        boolean result = subSetSumDPSubRoutine(array, target , memo , array.length);
+        for(int row = 0; row<array.length ; row++){
+            for(int col = 0 ; col< memo[row].length ; col++){
+                System.out.print(memo[row][col] + " ");
+            }
+            System.out.println();
+        }
+        return result ;
     }
 
     public static boolean subSetSumDPSubRoutine(int[] array , int target , Boolean[][] memo , int index){
         if(target==0){
             return true ;
         }
-        else if(target<0 || index==0){return false; }
-        else if(memo[index][target]!=null){
-            return memo[index][target];
+        if(target<0 || index==0){return false; }
+        else if(memo[index - 1][target]!=null){
+            return memo[index-1][target];
         }
         else if(array[index - 1]<= target){
             memo[index][target] = subSetSumDPSubRoutine(array , target - array[index -1] , memo , index - 1)
@@ -57,7 +64,7 @@ public class SubSetSum {
             return memo[index][target];
         }
         else{
-            memo[index][target] = memo[index-1][target];
+            memo[index][target] = subSetSumDPSubRoutine(array, target , memo , index - 1) ;
             return memo[index][target];
         }
     }
